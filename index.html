@@ -8,15 +8,19 @@
 </head>
 <body>
     <img src="#">
+    <button>New Image</button>
     <script>
         const img = document.querySelector("img");
-        fetch("https://api.giphy.com/v1/gifs/translate?api_key=Your API Key Here&s=cats", {mode: "cors"})
+        const btn = document.querySelector("button");
+        function newImg() {fetch("https://api.giphy.com/v1/gifs/translate?api_key=Your API Key Here&s=cats", {mode: "cors"})
         .then(function(response) {
             return response.json();
         })
         .then(function(response) {
             img.src = response.data.images.original.url;
-        });
+        })};
+        newImg();
+        btn.addEventListener("click",newImg);
     </script>
 </body>
 </html>
