@@ -8,18 +8,34 @@
 </head>
 <body>
     <img src="#">
-    <button>New Image</button>
+    <button class="new">New Image</button>
+    <form action="#" onsubmit="return searchIT()">
+        <input class="search" type="text" required>
+        <button class="sbtn">Search</button>
+    </form>
+
     <script>
         const img = document.querySelector("img");
-        const btn = document.querySelector("button");
-        function newImg() {fetch("https://api.giphy.com/v1/gifs/translate?api_key=Your API Key Here&s=cats", {mode: "cors"})
+        const btn = document.querySelector(".new");
+        const search = document.querySelector(".search");
+        var url = new URL("https://api.giphy.com/v1/gifs/translate?api_key=Your API Key Here&s=cats");
+        const searchBtn = document.querySelector("sbtn");
+
+        function searchIT() {
+            url.searchParams.set('s', search.value);
+            newImg();
+        };
+
+        function newImg() {fetch(url, {mode: "cors"})
         .then(function(response) {
             return response.json();
         })
         .then(function(response) {
             img.src = response.data.images.original.url;
         })};
+
         newImg();
+        
         btn.addEventListener("click",newImg);
     </script>
 </body>
